@@ -1,0 +1,51 @@
+Library ieee;
+use ieee.std_logic_1164.All;
+use ieee
+Entity project IS port(
+motor: In std_logic;
+sensor: In std_logic;
+row_line: out std_logic_vector(3 downto 0);
+col_line: in std_logic_vector(3 downto 0);
+sevenseg:out std_logic_vector(6 downto 0);
+sevenseg2:out std_logic_vector(6 downto 0);
+sevenseg3:out std_logic_vector(6 downto 0);
+sevenseg4:out std_logic_vector(6 downto 0);
+sevenseg5:out std_logic_vector(6 downto 0);
+sevenseg6:out std_logic_vector(6 downto 0);
+
+
+);
+Architecture arch of project Is 
+signal c: integer(0 to 2);
+begin
+c<=2;
+row_line<='0111';
+sevenseg<='0010010';
+process(col_line)
+begin
+case col_line is 
+When'0111'=> c<=c-1; sevenseg<='1001111';
+When'1011'=> c<=0;sevenseg<='0000001';
+When'1101'=> sevenseg<='0010000';
+				 sevenseg2<='0101101';
+				 sevenseg3<='0001001';
+				 sevenseg4<='0001000';
+				 sevenseg5<='1100000';
+				 sevenseg6<='1001100';
+when '1110'=> motor<='0';
+ wait until sensor'Event and sensor='0';
+ if sensor='0' then motor='1';
+ end if;+
+ 
+ end process;
+ 
+ 
+ 
+
+
+
+
+
+
+ 
+end arch;
